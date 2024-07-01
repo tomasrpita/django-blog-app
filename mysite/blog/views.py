@@ -21,8 +21,7 @@ def post_detail(request, year, month, day, post):
     # except Post.DoesNotExist:
     #     raise Http404("Post not found")
     post = get_object_or_404(
-        # Post.published,
-        status=Post.Status.PUBLISHED,
+        Post.published,
         slug=post,
         publish__year=year,
         publish__month=month,
