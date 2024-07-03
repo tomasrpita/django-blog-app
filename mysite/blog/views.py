@@ -1,5 +1,6 @@
 from django.core.mail import send_mail
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
 
@@ -37,6 +38,9 @@ def post_detail(request, year, month, day, post):
     #     post = Post.published.get(id=id)
     # except Post.DoesNotExist:
     #     raise Http404("Post not found")
+
+    SIMILAR_POST_MAX_COUNT = 4
+
     post = get_object_or_404(
         Post.published,
         slug=post,
@@ -49,10 +53,24 @@ def post_detail(request, year, month, day, post):
     comments = post.comments.filter(active=True)
     commet_form = CommentForm()
 
+    # List of similar posts
+    post_tags_ids = post.tags.values_list("id", flat=True)
+    similar_posts = (
+        Post.published.filter(tags__in=post_tags_ids)
+        .exclude(id=post.id)
+        .annotate(same_tags=Count("tags"))
+        .order_by("-same_tags", "-publish")[:SIMILAR_POST_MAX_COUNT]
+    )
+
     return render(
         request,
         "blog/post/detail.html",
-        {"post": post, "comments": comments, "comment_form": commet_form},
+        {
+            "post": post,
+            "comments": comments,
+            "comment_form": commet_form,
+            "similar_posts": similar_posts,
+        },
     )
 
 
