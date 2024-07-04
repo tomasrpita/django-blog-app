@@ -20,9 +20,8 @@
         </p>
         <h3>Latest posts</h3>
         {% show_latest_posts 3 %}
-        {% get_most_commented_posts 3 as most_commented_posts %}
         <h3>Most commented posts</h3>
-
+        {% get_most_commented_posts 3 as most_commented_posts %}
         <ul>
             {% for post in most_commented_posts %}
             <li>
