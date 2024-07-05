@@ -10,3 +10,10 @@ Este capítulo te enseñará cómo agregar paginación a tu blog, y cómo implem
 
 ## Capítulo 3: Ampliando tu Aplicación de Blog
 Este capítulo explora cómo integrar aplicaciones de terceros. Te guiará a través del proceso de crear un sistema de etiquetado, y aprenderás a construir QuerySets complejos para recomendar publicaciones similares. El capítulo te enseñará cómo crear etiquetas y filtros de plantillas personalizados. También aprenderás a utilizar el framework de mapas de sitio y a crear un feed RSS para tus publicaciones. Completarás tu aplicación de blog construyendo un motor de búsqueda utilizando las capacidades de búsqueda de texto completo de PostgreSQL.
+
+
+```bash
+docker run --name=blog_db -e POSRGRES_DB=blog -e POSTGRES_USER=blog -e POSTGRES_PASSWORD=xxxxx -p 5432:5432 -d postgres:16.2
+```
+
+```bash
