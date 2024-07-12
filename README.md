@@ -98,6 +98,6 @@ Asegúrate de tener Docker y Docker Compose instalados en tu sistema.
 
 ### Acceso a la Aplicación
 
-- La aplicación estará disponible en `http://localhost:8000`.
+- La aplicación estará disponible en `http://localhost:8000/blog`.
 - La interfaz de administración de Django estará en `http://localhost:8000/admin`.
 
